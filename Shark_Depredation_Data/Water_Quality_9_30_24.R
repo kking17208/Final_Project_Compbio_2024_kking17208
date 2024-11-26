@@ -25,7 +25,7 @@ for (sheet in sheet_names) {
 
 ##Extract data from each sheet then make a water profile##
 for (sheet in names(sheet_data)) {
-  data <- sheet_data[["Exon_Field_9_29_24"]]  # Get the data for this sheet
+  data <- sheet_data[[sheet]]  # Get the data for this sheet
   
 if ("depth_m" %in% names(data) && "odo_mg_l" %in% names(data)) {
     # Create a plot
@@ -48,7 +48,7 @@ if ("depth_m" %in% names(data) && "odo_mg_l" %in% names(data)) {
 
 ##Temperature Water Profiles##
 for (sheet in names(sheet_data)) {
-  data <- sheet_data[["Exon_Field_9_29_24"]]  # Get the data for this sheet
+  data <- sheet_data[[sheet]]  # Get the data for this sheet
   
 if ("depth_m" %in% names(data) && "temp_c" %in% names(data)) {
   # Create a plot
@@ -71,7 +71,7 @@ if ("depth_m" %in% names(data) && "temp_c" %in% names(data)) {
 
 ##Turbidity water profiles##
 for (sheet in names(sheet_data)) {
-  data <- sheet_data[["Exon_Field_9_29_24"]]  # Get the data for this sheet
+  data <- sheet_data[[sheet]]  # Get the data for this sheet
   
   if ("depth_m" %in% names(data) && "turbidity_fnu" %in% names(data)) {
     # Create a plot
@@ -94,7 +94,7 @@ for (sheet in names(sheet_data)) {
 
 ##Salinity water profiles##
 for (sheet in names(sheet_data)) {
-  data <- sheet_data[["Exon_Field_9_29_24"]]  # Get the data for this sheet
+  data <- sheet_data[[sheet]]  # Get the data for this sheet
   
   if ("depth_m" %in% names(data) && "sal_psu" %in% names(data)) {
     # Create a plot
