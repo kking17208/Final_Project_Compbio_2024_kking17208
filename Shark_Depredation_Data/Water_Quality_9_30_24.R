@@ -1,66 +1,116 @@
-##Water Quality Data 9/30##
+##Water Quality Data#
 ##load tidyverse##
+library(readxl)
 library(tidyverse)
 library(readr)
 library(janitor)
 library(ggplot2)
 library(dplyr)
 ##set working directory##
-setwd("~/OneDrive/Documents/")
+setwd("~/Final_Project_Compbio_2024_kking17208/Shark_Depredation_Data/")
 
-##reade excel file into R##
-water_quality <- read_csv("Kor Measurement File Export - 112524 085335.csv", locale = locale(encoding = "ISO-8859-1"))
+##read excel sheets##
+sheet_names <- excel_sheets("Water_Quality_Data.xlsx")
 
-##Clean the names of each column##
-water_quality <- water_quality %>%
-  clean_names(replace = c("\u00b5" = "u"))
+##Create a list of sheets##
+sheet_data <- list()
 
+##use a for loop to clean all the column names for each sheet##
+for (sheet in sheet_names) {
+  data <- read_excel("Water_Quality_Data.xlsx", sheet = "Exon_Field_9_29_24") %>%
+    clean_names(replace = c("Âµ" = "u"))
+  sheet_data[[sheet]] <- data
+  cat("Loaded sheet:", sheet, "\n")
+}
 
-##prepare data##
-depth_column <- "depth_m"  # Replace with the actual column name
-temperature_column <- "temp_c"  # Replace with the actual column name
+##Extract data from each sheet then make a water profile##
+for (sheet in names(sheet_data)) {
+  data <- sheet_data[["Exon_Field_9_29_24"]]  # Get the data for this sheet
+  
+if ("depth_m" %in% names(data) && "odo_mg_l" %in% names(data)) {
+    # Create a plot
+    plot <- ggplot(data, aes(x = odo_mg_l, y = depth_m)) +
+      geom_line() +
+      scale_y_reverse() +  # Reverse y-axis for depth
+      labs(
+        title = paste("Dissolved Oxygen Profile -", sheet),
+        x = "Dissolved Oxygen (mg/L)",
+        y = "Depth (m)"
+      ) +
+      theme_minimal()
+    # Save the plot
+    ggsave(filename = paste0("Water_Quality_Profiles/", sheet, "_Dissolved_Oxygen.png"),
+           plot = plot, width = 8, height = 6)
+    
+    cat("Saved plot for sheet:", sheet, "\n")
+  }
+}
 
-water_quality_clean <- water_quality %>%
-  select(depth = !!sym(depth_column), temperature = !!sym(temperature_column)) %>%
-  filter(!is.na(depth) & !is.na(temperature))
+##Temperature Water Profiles##
+for (sheet in names(sheet_data)) {
+  data <- sheet_data[["Exon_Field_9_29_24"]]  # Get the data for this sheet
+  
+if ("depth_m" %in% names(data) && "temp_c" %in% names(data)) {
+  # Create a plot
+  plot <- ggplot(data, aes(x = temp_c, y = depth_m)) +
+    geom_line() +
+    scale_y_reverse() +  # Reverse y-axis for depth
+    labs(
+      title = paste("Temperature (C) -", sheet),
+      x = "Temperature (C)",
+      y = "Depth (m)"
+    ) +
+    theme_minimal()
+  # Save the plot
+  ggsave(filename = paste0("Water_Quality_Profiles/", sheet, "_Temperature.png"),
+         plot = plot, width = 8, height = 6)
+  
+  cat("Saved plot for sheet:", sheet, "\n")
+}
+}
 
-water_quality_clean <- water_quality_clean %>%
-  group_by(depth) %>%
-  summarize(temperature = mean(temperature, na.rm = TRUE))
+##Turbidity water profiles##
+for (sheet in names(sheet_data)) {
+  data <- sheet_data[["Exon_Field_9_29_24"]]  # Get the data for this sheet
+  
+  if ("depth_m" %in% names(data) && "turbidity_fnu" %in% names(data)) {
+    # Create a plot
+    plot <- ggplot(data, aes(x = turbidity_fnu, y = depth_m)) +
+      geom_line() +
+      scale_y_reverse() +  # Reverse y-axis for depth
+      labs(
+        title = paste("Turbidity (FNU)", sheet),
+        x = "Turbidity (FNU)",
+        y = "Depth (m)"
+      ) +
+      theme_minimal()
+    # Save the plot
+    ggsave(filename = paste0("Water_Quality_Profiles/", sheet, "_Turbidity.png"),
+           plot = plot, width = 8, height = 6)
+    
+    cat("Saved plot for sheet:", sheet, "\n")
+  }
+}
 
-##make Depth vs Temperature Water Profile##
-ggplot(water_quality_clean, aes(x = temperature, y = depth)) +
-  geom_line(color = "red", size = 1) +
-  labs(
-    title = "Water Profile",
-    x = "Temperature (°C)",
-    y = "Depth (m)"
-  ) +
-  scale_y_reverse() +
-  scale_x_reverse() +
-  theme_minimal() +
-  theme(
-    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
-    axis.title = element_text(size = 12),
-    axis.text = element_text(size = 10)
-  )
-
-##make depth vs dissolved oxygen##
-water_quality_depth_do <- water_quality %>%
-  select(depth = depth_m, dissolved_oxygen = odo_mg_l)
-
-ggplot(water_quality_depth_do, aes(x = dissolved_oxygen, y = depth)) +
-  geom_line(color = "red", size = 1) +
-  labs(
-    title = "Water Profile",
-    x = "Dissolved Oxygen (mg/l)",
-    y = "Depth (m)"
-  ) +
-  scale_y_reverse() +
-  scale_x_reverse() +  
-  theme_minimal() +
-  theme(
-    plot.title = element_text(hjust = 0.5, size = 14, face = "bold"),
-    axis.title = element_text(size = 12),
-    axis.text = element_text(size = 10)
-  )
+##Salinity water profiles##
+for (sheet in names(sheet_data)) {
+  data <- sheet_data[["Exon_Field_9_29_24"]]  # Get the data for this sheet
+  
+  if ("depth_m" %in% names(data) && "sal_psu" %in% names(data)) {
+    # Create a plot
+    plot <- ggplot(data, aes(x = turbidity_fnu, y = depth_m)) +
+      geom_line() +
+      scale_y_reverse() +  # Reverse y-axis for depth
+      labs(
+        title = paste("Turbidity (FNU)", sheet),
+        x = "Salinity (PSU)",
+        y = "Depth (m)"
+      ) +
+      theme_minimal()
+    # Save the plot
+    ggsave(filename = paste0("Water_Quality_Profiles/", sheet, "_Salinity.png"),
+           plot = plot, width = 8, height = 6)
+    
+    cat("Saved plot for sheet:", sheet, "\n")
+  }
+}
