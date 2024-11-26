@@ -17,7 +17,7 @@ sheet_data <- list()
 
 ##use a for loop to clean all the column names for each sheet##
 for (sheet in sheet_names) {
-  data <- read_excel("Water_Quality_Data.xlsx", sheet = "Exon_Field_9_29_24") %>%
+  data <- read_excel("Water_Quality_Data.xlsx", sheet = sheet) %>%
     clean_names(replace = c("µ" = "u"))
   sheet_data[[sheet]] <- data
   cat("Loaded sheet:", sheet, "\n")
@@ -98,11 +98,11 @@ for (sheet in names(sheet_data)) {
   
   if ("depth_m" %in% names(data) && "sal_psu" %in% names(data)) {
     # Create a plot
-    plot <- ggplot(data, aes(x = turbidity_fnu, y = depth_m)) +
+    plot <- ggplot(data, aes(x = sal_psu, y = depth_m)) +
       geom_line() +
       scale_y_reverse() +  # Reverse y-axis for depth
       labs(
-        title = paste("Turbidity (FNU)", sheet),
+        title = paste("Salinity (PSU)", sheet),
         x = "Salinity (PSU)",
         y = "Depth (m)"
       ) +
@@ -113,4 +113,76 @@ for (sheet in names(sheet_data)) {
     
     cat("Saved plot for sheet:", sheet, "\n")
   }
+}
+
+###
+for (sheet in names(sheet_data)) {
+  # Dynamically fetch data for the current sheet
+  data <- sheet_data[[sheet]]
+  
+  # Check if required columns exist for all parameters
+  if ("depth_m" %in% names(data)) {
+    # 1. Dissolved Oxygen Plot
+    if ("odo_mg_l" %in% names(data)) {
+      plot_oxygen <- ggplot(data, aes(x = odo_mg_l, y = depth_m)) +
+        geom_line() +
+        scale_y_reverse() +
+        labs(
+          title = paste("Dissolved Oxygen Profile -", sheet),
+          x = "Dissolved Oxygen (mg/L)",
+          y = "Depth (m)"
+        ) +
+        theme_minimal()
+      ggsave(filename = paste0("Water_Quality_Profiles/", sheet, "_Dissolved_Oxygen.png"),
+             plot = plot_oxygen, width = 8, height = 6)
+    }
+    
+    # 2. Salinity Plot
+    if ("sal_psu" %in% names(data)) {
+      plot_salinity <- ggplot(data, aes(x = sal_psu, y = depth_m)) +
+        geom_line() +
+        scale_y_reverse() +
+        labs(
+          title = paste("Salinity Profile -", sheet),
+          x = "Salinity (PSU)",
+          y = "Depth (m)"
+        ) +
+        theme_minimal()
+      ggsave(filename = paste0("Water_Quality_Profiles/", sheet, "_Salinity.png"),
+             plot = plot_salinity, width = 8, height = 6)
+    }
+    
+    # 3. Turbidity Plot
+    if ("turbidity_fnu" %in% names(data)) {
+      plot_turbidity <- ggplot(data, aes(x = turbidity_fnu, y = depth_m)) +
+        geom_line() +
+        scale_y_reverse() +
+        labs(
+          title = paste("Turbidity Profile -", sheet),
+          x = "Turbidity (FNU)",
+          y = "Depth (m)"
+        ) +
+        theme_minimal()
+      ggsave(filename = paste0("Water_Quality_Profiles/", sheet, "_Turbidity.png"),
+             plot = plot_turbidity, width = 8, height = 6)
+    }
+    
+    # 4. Temperature Plot
+    if ("temp_c" %in% names(data)) {
+      plot_temperature <- ggplot(data, aes(x = temp_c, y = depth_m)) +
+        geom_line() +
+        scale_y_reverse() +
+        labs(
+          title = paste("Temperature Profile -", sheet),
+          x = "Temperature (°C)",
+          y = "Depth (m)"
+        ) +
+        theme_minimal()
+      ggsave(filename = paste0("Water_Quality_Profiles/", sheet, "_Temperature.png"),
+             plot = plot_temperature, width = 8, height = 6)
+    }
+  }
+  
+  # Print progress
+  cat("Processed and saved plots for sheet:", sheet, "\n")
 }
