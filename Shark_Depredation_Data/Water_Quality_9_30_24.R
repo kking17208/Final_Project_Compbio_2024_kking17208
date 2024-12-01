@@ -1,5 +1,5 @@
 ##Water Quality Data#
-##load tidyverse##
+##load libraries##
 library(readxl)
 library(tidyverse)
 library(readr)
