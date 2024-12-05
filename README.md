@@ -10,7 +10,7 @@ This analysis is split into two r codes Water Quality and Shark Depredation. Wat
 Shark deprdation data is intended to answer two questions does the shark deterrent effect the target catch rates and how efficent is the Sharkbanz Zeppelin at decreasing depredation rates. 
 My data will include water profiles, depredation behavior observations in the prescense and absence of shark deterrents , and species compositional data.
 
-##Shark Depredation Analysis
-###CPUE Control vs. Zeppelin
-##Water Quality Analysis
-###Water Quality Profiles
+## Shark Depredation Analysis
+### CPUE Control vs. Zeppelin
+## Water Quality Analysis
+### Water Quality Profiles
