@@ -15,10 +15,11 @@ My data will include water profiles, depredation behavior observations in the pr
 ## Water Quality Analysis
 ### Water Quality Profiles
 Install Packages
-'''##install packages##
+'''code'''
+##install packages##
 install.packages("readxl")
 install.packages("tidyverse")
 install.packages("readr")
 install.packages("janitor")
 install.packages("ggplot2")
-install.packages("dplyr")'''
+install.packages("dplyr")
