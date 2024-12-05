@@ -110,7 +110,7 @@ cpue_by_treatment %>%
   theme_minimal()
 ```
 Box and whisker plot comparing treatments
-![Alt text](Box_and_Whisker_plot_cont_vs_zep_CPUE.png)
+![Box and Whiskerplot cont vs zep comparing CPUE](Box_and_Whisker_plot_cont_vs_zep_CPUE.png)
 Check the assumptions of a GLM (guassian) normality, homoscedastiicity, and continuous Variance
 ```
 par(mfrow = c(2, 2))
