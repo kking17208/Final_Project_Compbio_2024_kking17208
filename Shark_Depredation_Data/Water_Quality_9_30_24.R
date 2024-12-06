@@ -1,4 +1,11 @@
 ##Water Quality Data#
+##install packages##
+install.packages("readxl")
+install.packages("tidyverse")
+install.packages("readr")
+install.packages("janitor")
+install.packages("ggplot2")
+install.packages("dplyr")
 ##load libraries##
 library(readxl)
 library(tidyverse)
@@ -30,14 +37,14 @@ for (sheet in names(sheet_data)) {
 if ("depth_m" %in% names(data) && "odo_mg_l" %in% names(data)) {
     # Create a plot
     plot <- ggplot(data, aes(x = odo_mg_l, y = depth_m)) +
-      geom_line() +
+      geom_line(color = "red") +
       scale_y_reverse() +  # Reverse y-axis for depth
       labs(
         title = paste("Dissolved Oxygen Profile -", sheet),
         x = "Dissolved Oxygen (mg/L)",
         y = "Depth (m)"
       ) +
-      theme_minimal()
+      theme_classic()
     # Save the plot
     ggsave(filename = paste0("Water_Quality_Profiles/", sheet, "_Dissolved_Oxygen.png"),
            plot = plot, width = 8, height = 6)
@@ -53,14 +60,14 @@ for (sheet in names(sheet_data)) {
 if ("depth_m" %in% names(data) && "temp_c" %in% names(data)) {
   # Create a plot
   plot <- ggplot(data, aes(x = temp_c, y = depth_m)) +
-    geom_line() +
+    geom_line(color = "red") +
     scale_y_reverse() +  # Reverse y-axis for depth
     labs(
       title = paste("Temperature (C) -", sheet),
       x = "Temperature (C)",
       y = "Depth (m)"
     ) +
-    theme_minimal()
+    theme_classic()
   # Save the plot
   ggsave(filename = paste0("Water_Quality_Profiles/", sheet, "_Temperature.png"),
          plot = plot, width = 8, height = 6)
@@ -76,14 +83,14 @@ for (sheet in names(sheet_data)) {
   if ("depth_m" %in% names(data) && "turbidity_fnu" %in% names(data)) {
     # Create a plot
     plot <- ggplot(data, aes(x = turbidity_fnu, y = depth_m)) +
-      geom_line() +
+      geom_line(color = "red") +
       scale_y_reverse() +  # Reverse y-axis for depth
       labs(
         title = paste("Turbidity (FNU)", sheet),
         x = "Turbidity (FNU)",
         y = "Depth (m)"
       ) +
-      theme_minimal()
+      theme_classic()
     # Save the plot
     ggsave(filename = paste0("Water_Quality_Profiles/", sheet, "_Turbidity.png"),
            plot = plot, width = 8, height = 6)
@@ -99,14 +106,14 @@ for (sheet in names(sheet_data)) {
   if ("depth_m" %in% names(data) && "sal_psu" %in% names(data)) {
     # Create a plot
     plot <- ggplot(data, aes(x = sal_psu, y = depth_m)) +
-      geom_line() +
+      geom_line(color = "red") +
       scale_y_reverse() +  # Reverse y-axis for depth
       labs(
         title = paste("Salinity (PSU)", sheet),
         x = "Salinity (PSU)",
         y = "Depth (m)"
       ) +
-      theme_minimal()
+      theme_classic()
     # Save the plot
     ggsave(filename = paste0("Water_Quality_Profiles/", sheet, "_Salinity.png"),
            plot = plot, width = 8, height = 6)
@@ -186,3 +193,4 @@ for (sheet in names(sheet_data)) {
   # Print progress
   cat("Processed and saved plots for sheet:", sheet, "\n")
 }
+
