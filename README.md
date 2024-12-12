@@ -78,7 +78,9 @@ Make GLM for CPUE
 ```
 glm_CPUE <- glm(CPUE ~ treatment, data = cpue_by_treatment, family = gaussian())
 summary(glm_CPUE)
-#output
+```
+output
+```
 Call:
 glm(formula = CPUE ~ treatment, family = gaussian(), data = cpue_by_treatment)
 Coefficients:
@@ -96,6 +98,8 @@ Signif. codes:
 Residual deviance: 2.0845  on 4  degrees of freedom
 AIC: 16.684
 Number of Fisher Scoring iterations: 2
+```
+```
 #Make a box and whisker plot to visualize the output
 cpue_by_treatment %>%
   ggplot(aes(x = treatment, y = CPUE, fill = treatment)) +
@@ -110,7 +114,7 @@ cpue_by_treatment %>%
   theme_minimal()
 ```
 Box and whisker plot comparing treatments
-![Box and Whiskerplot cont vs zep comparing CPUE](Box_and_Whisker_plot_cont_vs_zep_CPUE.png)
+![Box and Whiskerplot cont vs zep comparing CPUE](Shark_Depredation_Data/Box_and_Whisker_plot_cont_vs_zep_CPUE.png)
 Check the assumptions of a GLM (guassian) normality, homoscedastiicity, and continuous Variance
 ```
 par(mfrow = c(2, 2))
@@ -172,7 +176,7 @@ ggplot(predicted_probs, aes(x = treatment, y = predicted_prob, fill = treatment)
   ) +
   theme_minimal()
 ```
-![Alt text](Predicted_Probability_of_Depredation_Occurring_between_treatments.png)
+![Alt text]()
 ## Water Quality Analysis
 ### Prepare/ Clean Data
 Install Packages
