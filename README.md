@@ -114,8 +114,8 @@ cpue_by_treatment %>%
   theme_minimal()
 ```
 Box and whisker plot comparing treatments
-![Box and Whiskerplot cont vs zep comparing CPUE](Shark_Depredation_Data/Box_and_Whisker_plot_cont_vs_zep_CPUE.png)
-Check the assumptions of a GLM (guassian) normality, homoscedastiicity, and continuous Variance
+![Box and Whiskerplot cont vs zep comparing CPUE](Shark_Depredation_Data/Box%20and%20Whisker%20plot%20cont%20vs%20zep%20CPUE.png)
+Check the assumptions of a GLM (guassian) normality, homoscedasticity, and continuous Variance
 ```
 par(mfrow = c(2, 2))
 plot(glm_CPUE)
