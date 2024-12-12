@@ -114,14 +114,19 @@ cpue_by_treatment %>%
   theme_minimal()
 ```
 Box and whisker plot comparing treatments
-![Box and Whiskerplot cont vs zep comparing CPUE](Shark_Depredation_Data/Box%20and%20Whisker%20plot%20cont%20vs%20zep%20CPUE.png)
+
+![Box and Whiskerplot cont vs zep comparing CPUE]
+(Shark_Depredation_Data/Box%20and%20Whisker%20plot%20cont%20vs%20zep%20CPUE.png)
+
 Check the assumptions of a GLM (guassian) normality, homoscedasticity, and continuous Variance
 ```
 par(mfrow = c(2, 2))
 plot(glm_CPUE)
 ```
 Assumptions Test Image
-![Alt text](Check_for_assumptions_CPUE_treatments.png)
+![Test assumptions of your Generalized Linear Model]
+(Check%20for%20assumptions%20CPUE%20treatments.png)
+
 Recreate Box and Whisker Plot with the p-value
 ```
 glm_summary <- summary(glm_CPUE)
@@ -135,7 +140,10 @@ ggboxplot(data = cpue_by_treatment, x = "treatment", y = "CPUE", add = "jitter")
   )
 ```
 Output
-![Alt text](CPUE_Box_and_Whisker_Plots_with_P-value.png)
+
+![Add P-value to box and whisker plot]
+(CPUE%20Box%20and20%Whisker%20Plots20%with20%P-value.png)
+
 ### Shark Deterrent Results
 Using the previous steps from running the GLM for CPUE continue on to run binomial GLM to determine the difference between shark depredation rates of our two treatments. 
 
@@ -176,7 +184,9 @@ ggplot(predicted_probs, aes(x = treatment, y = predicted_prob, fill = treatment)
   ) +
   theme_minimal()
 ```
-![Alt text]()
+![Predicted probability of depredation using each treatment]
+(Predicted%20Probability%20of%20Depredation%20Occurring%20between%20treatments.png)
+
 ## Water Quality Analysis
 ### Prepare/ Clean Data
 Install Packages
