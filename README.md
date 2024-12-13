@@ -29,7 +29,8 @@ library(ggpubr)
 ```
 Set Working Directory
 ```
-setwd("~/Final_Project_Compbio_2024_kking17208/Shark_Depredation_Data/")
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd(../Final_Project_Compbio_2024_kking17208/Shark_Depredation_Data/")
 ```
 Read Excel File 
 ```
@@ -204,6 +205,7 @@ library(dplyr)
 ```
 Set Working Directory
 ```
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
 setwd("~/Final_Project_Compbio_2024_kking17208/Shark_Depredation_Data/")
 ```
 Read each Excel Sheet into R
