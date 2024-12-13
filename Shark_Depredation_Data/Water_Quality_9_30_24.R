@@ -6,6 +6,7 @@ install.packages("readr")
 install.packages("janitor")
 install.packages("ggplot2")
 install.packages("dplyr")
+install.packages("rstudioapi")
 ##load libraries##
 library(readxl)
 library(tidyverse)
@@ -13,8 +14,10 @@ library(readr)
 library(janitor)
 library(ggplot2)
 library(dplyr)
+library(rstudioapi)
 ##set working directory##
-setwd("~/Final_Project_Compbio_2024_kking17208/Shark_Depredation_Data/")
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd("../Final_Project_Compbio_2024_kking17208/Shark_Depredation_Data/")
 
 ##read excel sheets##
 sheet_names <- excel_sheets("Water_Quality_Data.xlsx")

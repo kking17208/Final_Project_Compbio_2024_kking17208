@@ -5,14 +5,17 @@ install.packages("readxl")
 install.packages("janitor")
 install.packages("lubridate")
 install.packages("ggpubr")
+install.packages("rstudioapi")
 ##load libraries##
 library(tidyverse)
 library(readxl)
 library(janitor)
 library(lubridate)
 library(ggpubr)
+library(rstudioapi)
 ##set working directory##
-setwd("~/Final_Project_Compbio_2024_kking17208/Shark_Depredation_Data/")
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+setwd("../Final_Project_Compbio_2024_kking17208/Shark_Depredation_Data/")
 
 ##read excel file##
 yf_data <- read_excel("Shark_Depredation_Data.xlsx", sheet = "Yellowfin_Fishing") %>%
