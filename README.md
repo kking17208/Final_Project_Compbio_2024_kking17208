@@ -78,7 +78,9 @@ Make GLM for CPUE
 ```
 glm_CPUE <- glm(CPUE ~ treatment, data = cpue_by_treatment, family = gaussian())
 summary(glm_CPUE)
-#output
+```
+output
+```
 Call:
 glm(formula = CPUE ~ treatment, family = gaussian(), data = cpue_by_treatment)
 Coefficients:
@@ -96,6 +98,8 @@ Signif. codes:
 Residual deviance: 2.0845  on 4  degrees of freedom
 AIC: 16.684
 Number of Fisher Scoring iterations: 2
+```
+```
 #Make a box and whisker plot to visualize the output
 cpue_by_treatment %>%
   ggplot(aes(x = treatment, y = CPUE, fill = treatment)) +
@@ -110,14 +114,18 @@ cpue_by_treatment %>%
   theme_minimal()
 ```
 Box and whisker plot comparing treatments
-![Box and Whiskerplot cont vs zep comparing CPUE](Box_and_Whisker_plot_cont_vs_zep_CPUE.png)
-Check the assumptions of a GLM (guassian) normality, homoscedastiicity, and continuous Variance
+
+![](Shark_Depredation_Data/Box%20and%20Whisker%20plot%20cont%20vs%20zep%20CPUE.png)
+
+Check the assumptions of a GLM (guassian) normality, homoscedasticity, and continuous Variance
 ```
 par(mfrow = c(2, 2))
 plot(glm_CPUE)
 ```
 Assumptions Test Image
-![Alt text](Check_for_assumptions_CPUE_treatments.png)
+
+![](Shark_Depredation_Data/Check%20for%20assumptions%20CPUE%20treatments.png)
+
 Recreate Box and Whisker Plot with the p-value
 ```
 glm_summary <- summary(glm_CPUE)
@@ -130,8 +138,6 @@ ggboxplot(data = cpue_by_treatment, x = "treatment", y = "CPUE", add = "jitter")
     y = "Catch Per Unit Effort"
   )
 ```
-Output
-![Alt text](CPUE_Box_and_Whisker_Plots_with_P-value.png)
 ### Shark Deterrent Results
 Using the previous steps from running the GLM for CPUE continue on to run binomial GLM to determine the difference between shark depredation rates of our two treatments. 
 
@@ -139,7 +145,9 @@ Start by running the GLM with our already prepared data
 ```
 glm_dep <- glm(depredation_binary ~ treatment, data = yf_data, family = binomial(link = "logit"))
 summary(glm_dep)
-#output
+```
+Output
+```
 Call:
 glm(formula = depredation_binary ~ treatment, family = binomial(link = "logit"), 
     data = yf_data)
@@ -172,7 +180,8 @@ ggplot(predicted_probs, aes(x = treatment, y = predicted_prob, fill = treatment)
   ) +
   theme_minimal()
 ```
-![Alt text](Predicted_Probability_of_Depredation_Occurring_between_treatments.png)
+![](Shark_Depredation_Data/Predicted%20Probability%20of%20Depredation%20Occurring%20between%20treatments.png)
+
 ## Water Quality Analysis
 ### Prepare/ Clean Data
 Install Packages
